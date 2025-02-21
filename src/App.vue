@@ -1,17 +1,28 @@
 <script setup>
+// import { NSpin } from "naive-ui";
 import Gallery from "./components/gallery.vue";
 </script>
 
 <template>
-  <main>
-    <Gallery />
-  </main>
+  <Suspense>
+    <template #default>
+      <main>
+        <Gallery />
+      </main>
+    </template>
+    <template #fallback>
+      <div class="cards">
+        <NSpin size="large" />
+      </div>
+    </template>
+  </Suspense>
 </template>
 <style scoped>
-main {
+.cards {
+  height: 700px;
+  background-color: rgb(27, 26, 26);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
 }
 </style>
