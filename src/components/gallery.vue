@@ -94,7 +94,7 @@ onMounted(() => {
   getTopic();
 });
 </script>
-<!-- // how to make the active buttons disabled at search.value -->
+
 <template>
   <nav>
     <div class="nav">
@@ -116,6 +116,24 @@ onMounted(() => {
           :class="{ active: selectedTopic === '' }"
           >All</NButton
         >
+        <!-- <NButton secondary type="info" class="buttons">All</NButton>
+        <NButton secondary type="info" class="buttons">Nature</NButton>
+        <NButton secondary type="info" class="buttons">Classified</NButton>
+        <NButton secondary type="info" class="buttons">Wallpapers</NButton>
+        <NButton secondary type="info" class="buttons">Classic Photos</NButton>
+        <NButton secondary type="info" class="buttons">Photoshop</NButton>
+        <NButton secondary type="info" class="buttons">Free AI</NButton>
+        <NButton secondary type="info" class="buttons">Getty</NButton>
+        <NButton secondary type="info" class="buttons">Beauty Picture</NButton>
+        <NButton secondary type="info" class="buttons">Beautiful</NButton>
+        <NButton secondary type="info" class="buttons">Enhance</NButton>
+        <NButton secondary type="info" class="buttons">Optimise</NButton>
+        <NButton secondary type="info" class="buttons">Image</NButton>
+        <NButton secondary type="info" class="buttons">Pictures</NButton>
+        <NButton secondary type="info" class="buttons">Screensaver</NButton>
+        <NButton secondary type="info" class="buttons">Search</NButton>
+        <NButton secondary type="info" class="buttons">Engines</NButton>
+        <NButton secondary type="info" class="buttons">Calc</NButton> -->
         <NButton
           secondary
           type="info"
@@ -142,6 +160,7 @@ onMounted(() => {
         alt="photo.alt_description
       "
       />
+      <!-- <img src="/src/img/6xc1vsag8ej41.jpg" alt="img" /> -->
       <div class="p-tags">
         <p class="title">{{ photo.alt_description || "No title available" }}</p>
       </div>
@@ -267,7 +286,7 @@ h1 {
   transition: background 0.3s;
 }
 .buttons.active {
-  background-color: #007bff; /* Highlight selected topic */
+  background-color: #007bff;
   color: white;
 }
 .modal {
@@ -286,11 +305,11 @@ h1 {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  max-width: 90%;
+  max-width: 80%;
   /* max-height: 90%; */
 }
 .modal img {
-  width: 800%;
+  width: 100%;
   max-width: 500px;
   border-radius: 8px;
 }
@@ -308,7 +327,7 @@ h1 {
   color: white;
   cursor: pointer;
 }
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .gallery {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
@@ -316,9 +335,9 @@ h1 {
   .search {
     width: 90%;
   }
-}
+} */
 
-@media (max-width: 480px) {
+@media (max-width: 670px) {
   .nav {
     display: flex;
     flex-direction: column;
@@ -337,7 +356,9 @@ h1 {
   }
 
   .gallery {
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
   }
 
   .photo {
@@ -346,39 +367,45 @@ h1 {
 
   .filter-container {
     width: 100%;
+    display: flex;
     overflow-x: auto;
     white-space: nowrap;
-    scrollbar-width: none;
     -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   .filter-container::-webkit-scrollbar {
-    display: block;
+    display: none;
   }
 
-  .filter {
-    margin-bottom: 30px;
-    display: flex;
-    flex-direction: row;
-    /* align-items: center;
-    justify-content: space-between; */
-    /* margin-right: 20px;
-    margin-left: 20px; */
-    /* flex-wrap: wrap; */
-    /* gap: 5px; */
+  /* .buttons {
+    flex-shrink: 0;
+  } */
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 90%;
+    max-height: 90%;
+  }
+  .modal img {
+    width: 100%;
+    max-width: 200px;
+    /* height: 100%; */
+    /* max-height: 300px; */
+    border-radius: 8px;
   }
 }
 
 @media (max-width: 1024px) {
   .gallery {
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-
-  .filter {
-    flex-wrap: wrap;
+    gap: 8px;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1025px) {
   .gallery {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
