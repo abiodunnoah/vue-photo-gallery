@@ -98,7 +98,7 @@ onMounted(() => {
 <template>
   <main>
     <Nav
-      v-model.trim:search="search"
+      v-model:search="search"
       :topics="topics"
       v-model:selectedTopic="selectedTopic"
     />

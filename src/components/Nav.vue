@@ -18,7 +18,7 @@ const selectTopic = (topicId) => {
         <div class="input">
           <input
             :value="search"
-            @input="$emit('search', $event.target.value)"
+            @input="$emit('update:search', $event.target.value)"
             type="search"
             placeholder="Search..."
             class="search"
