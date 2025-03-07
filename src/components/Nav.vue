@@ -77,6 +77,7 @@ const selectTopic = (topicId) => {
 
 .profile-image {
   width: 40px;
+  height: 40px;
   border-radius: 25px;
   margin-left: 50px;
 }

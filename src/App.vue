@@ -3,7 +3,7 @@ import { ref, watch, onMounted, defineAsyncComponent } from "vue";
 import axios from "axios";
 import Nav from "./components/Nav.vue";
 
-const Gallery = defineAsyncComponent(() => import("@/components/Gallery.vue"));
+const Gallery = defineAsyncComponent(() => import("@/components/gallery.vue"));
 const Modal = defineAsyncComponent(() => import("@/components/Modal.vue"));
 
 const accessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
@@ -129,7 +129,7 @@ onMounted(() => {
       </template>
       <template #fallback>
         <div class="cards">
-          <NSpin size="large" />
+          <NSpin size="small" />
         </div>
       </template>
     </Suspense>
@@ -137,7 +137,7 @@ onMounted(() => {
 </template>
 <style scoped>
 .cards {
-  height: 500px;
+  height: 600px;
   /* background-color: rgb(27, 26, 26); */
   display: flex;
   justify-content: center;
