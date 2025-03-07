@@ -19,7 +19,7 @@ const selectTopic = (topicId) => {
           <input
             :value="search"
             @input="$emit('update:search', $event.target.value)"
-            type="search"
+            type="text"
             placeholder="Search..."
             class="search"
           />
@@ -70,6 +70,13 @@ const selectTopic = (topicId) => {
   margin-right: 20px;
   max-width: 100%;
 }
+
+/* input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  content: "❌";
+  cursor: pointer;
+} */
 
 .avatar {
   width: 108px;
