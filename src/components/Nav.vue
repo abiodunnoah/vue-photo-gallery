@@ -26,7 +26,7 @@ const selectTopic = (topicId) => {
         </div>
         <div class="avatar">
           <img
-            src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Favatar&psig=AOvVaw1DUzBFupGb672toBQxQN5R&ust=1741131356754000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCND5_PWJ74sDFQAAAAAdAAAAABAP"
+            src="https://img.freepik.com/premium-psd/smiling-3d-cartoon-man_975163-762.jpg?w=826"
             alt="profile-image"
             class="profile-image"
           />
@@ -72,7 +72,13 @@ const selectTopic = (topicId) => {
 }
 
 .avatar {
-  width: 150px;
+  width: 108px;
+}
+
+.profile-image {
+  width: 40px;
+  border-radius: 25px;
+  margin-left: 50px;
 }
 
 h1 {
