@@ -1,5 +1,5 @@
 <script setup>
-defineProps(["photo"]);
+defineProps(["photo", "isModalLoading"]);
 
 const emit = defineEmits(["close"]);
 </script>
@@ -8,11 +8,16 @@ const emit = defineEmits(["close"]);
   <div v-if="photo" class="modal" @click.self="emit('close')">
     <div class="modal-content">
       <button class="close-btn" @click.self="emit('close')">&times;</button>
-      <img
-        v-if="photo && photo.urls"
-        :src="photo.urls.regular"
-        :alt="photo.alt_description"
-      />
+      <div v-if="isModalLoading" class="spinner">
+        <NSpin size="large" />
+      </div>
+      <div v-else>
+        <img
+          v-if="photo && photo.urls"
+          :src="photo.urls.regular"
+          :alt="photo.alt_description"
+        />
+      </div>
 
       <p class="modal-text">
         {{ photo.alt_description || "No title available" }}
@@ -59,6 +64,14 @@ const emit = defineEmits(["close"]);
   border: none;
   color: white;
   cursor: pointer;
+}
+
+.spinner {
+  height: 400px;
+  /* background-color: rgb(27, 26, 26); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 670px) {

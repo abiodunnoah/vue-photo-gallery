@@ -1,10 +1,12 @@
 <script setup>
-import { ref, watch, onMounted, defineAsyncComponent } from "vue";
+import { ref, watch, onMounted } from "vue";
 import axios from "axios";
 import Nav from "./components/Nav.vue";
+import Gallery from "@/components/gallery.vue";
+import Modal from "@/components/Modal.vue";
 
-const Gallery = defineAsyncComponent(() => import("@/components/gallery.vue"));
-const Modal = defineAsyncComponent(() => import("@/components/Modal.vue"));
+// const Gallery = defineAsyncComponent(() => import("@/components/gallery.vue"));
+// const Modal = defineAsyncComponent(() => import("@/components/Modal.vue"));
 
 const accessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 
@@ -14,8 +16,11 @@ const selectedPhoto = ref(null);
 const selectedTopic = ref("");
 const search = ref("");
 const topics = ref(null);
+const isLoading = ref(false);
+const isModalLoading = ref(false);
 
 const getPhotos = async () => {
+  isLoading.value = true;
   try {
     let url = "https://api.unsplash.com/photos";
 
@@ -40,10 +45,13 @@ const getPhotos = async () => {
     photos.value = search.value.trim() ? response.data.results : response.data;
   } catch (error) {
     console.log("Error fetching Unsplash photos", error);
+  } finally {
+    isLoading.value = false;
   }
 };
 
 const getTopic = async () => {
+  isLoading.value = true;
   try {
     const res = await axios.get("https://api.unsplash.com/topics", {
       headers: {
@@ -56,6 +64,8 @@ const getTopic = async () => {
     topics.value = res.data;
   } catch (error) {
     console.log("Error fetching topics", error);
+  } finally {
+    isLoading.value = false;
   }
 };
 
@@ -82,7 +92,12 @@ watch(selectedTopic, () => {
 });
 
 const openModal = (image) => {
+  isModalLoading.value = true;
   selectedPhoto.value = image;
+
+  setTimeout(() => {
+    isModalLoading.value = false;
+  }, 2000);
 };
 
 const closeModal = () => {
@@ -103,40 +118,27 @@ onMounted(() => {
       v-model:selectedTopic="selectedTopic"
     />
 
-    <Suspense>
-      <template #default>
-        <Gallery :photos="photos" @photoSelected="openModal" />
-      </template>
-      <template #fallback>
-        <div class="cards">
-          <NSpin size="large" />
-        </div>
-      </template>
-    </Suspense>
+    <div v-if="isLoading" class="spinner">
+      <NSpin size="large" />
+    </div>
+
+    <Gallery v-else :photos="photos" @photoSelected="openModal" />
 
     <div class="button-container">
       <button @click="page--">&lt;</button>
       <button @click="page++">></button>
     </div>
 
-    <Suspense>
-      <template #default>
-        <Modal
-          v-if="selectedPhoto"
-          :photo="selectedPhoto"
-          @close="closeModal"
-        />
-      </template>
-      <template #fallback>
-        <div class="cards">
-          <NSpin size="small" />
-        </div>
-      </template>
-    </Suspense>
+    <Modal
+      v-if="selectedPhoto"
+      :photo="selectedPhoto"
+      @close="closeModal"
+      :isModalLoading="isModalLoading"
+    />
   </main>
 </template>
 <style scoped>
-.cards {
+.spinner {
   height: 400px;
   /* background-color: rgb(27, 26, 26); */
   display: flex;
