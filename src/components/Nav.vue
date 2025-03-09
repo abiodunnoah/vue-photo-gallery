@@ -87,6 +87,7 @@ const selectTopic = (topicId) => {
   height: 40px;
   border-radius: 25px;
   margin-left: 50px;
+  cursor: pointer;
 }
 
 h1 {
