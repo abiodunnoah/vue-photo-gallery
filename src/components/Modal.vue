@@ -1,4 +1,6 @@
 <script setup>
+import { saveAs } from "file-saver";
+
 const props = defineProps(["photo", "isModalLoading"]);
 
 const emit = defineEmits(["close"]);
@@ -9,17 +11,25 @@ const downloadImage = async () => {
     return;
   }
 
+  // try {
+  //   const response = await fetch(props.photo.urls.full);
+  //   const blob = await response.blob();
+  //   const link = document.createElement("a");
+  //   link.href = URL.createObjectURL(blob);
+  //   link.download = "downloaded-image.jpg"; // Custom filename
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // } catch (error) {
+  //   console.error("Error downloading image:", error);
+  // }
+
   try {
     const response = await fetch(props.photo.urls.full);
     const blob = await response.blob();
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "downloaded-image.jpg"; // Custom filename
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    saveAs(blob, "download-image.jpg");
   } catch (error) {
-    console.error("Error downloading image:", error);
+    console.log("Error downloading image", error);
   }
 };
 </script>
@@ -67,12 +77,12 @@ const downloadImage = async () => {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  max-width: 80%;
+  max-width: 70%;
   /* max-height: 90%; */
 }
 .modal img {
-  width: 100%;
-  max-width: 500px;
+  width: 70%;
+  /* max-width: 500px; */
   border-radius: 8px;
 }
 .modal-text {
@@ -104,15 +114,16 @@ const downloadImage = async () => {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 70%;
+    /* max-height: 90%; */
   }
   .modal img {
-    width: 100%;
-    max-width: 200px;
-    /* height: 100%; */
-    /* max-height: 300px; */
+    width: 70%;
+    /* max-width: 200px; */
     border-radius: 8px;
+  }
+  .spinner {
+    height: 200px;
   }
 }
 </style>
