@@ -71,7 +71,7 @@ const getTopic = async () => {
 
 // watch for search
 watch(search, (newValue) => {
-  if (newValue.trim() !== selectedTopic.value) {
+  if (newValue.trim() !== "" && newValue.trim() !== selectedTopic.value) {
     selectedTopic.value = "";
   }
   page.value = 1;
@@ -87,6 +87,9 @@ watch(page, () => {
 
 // watch for filter
 watch(selectedTopic, () => {
+  if (selectedTopic.value) {
+    search.value = "";
+  }
   page.value = 1;
   getPhotos();
 });

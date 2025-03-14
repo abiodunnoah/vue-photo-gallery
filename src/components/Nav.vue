@@ -5,6 +5,7 @@ const emit = defineEmits(["update:selectedTopic", "update:search"]);
 
 const selectTopic = (topicId) => {
   emit("update:selectedTopic", topicId);
+  emit("update:search", "");
 };
 </script>
 
@@ -140,10 +141,28 @@ h1 {
 
 @media (max-width: 670px) {
   .nav {
-    display: flex;
     flex-direction: column;
-    justify-content: centers;
+    /* justify-content: center; */
     align-items: center;
+    position: relative;
+  }
+
+  .input {
+    /* max-width: 90%; */
+    margin-bottom: 10px;
+  }
+
+  .search {
+    padding: 10px;
+    /* padding-right: 170px; */
+    border-radius: 20px;
+  }
+
+  .avatar {
+    width: 40px;
+    position: absolute;
+    top: 50px;
+    right: 55px;
   }
 
   .header h1 {

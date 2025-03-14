@@ -1,13 +1,33 @@
 <script setup>
-defineProps(["photo", "isModalLoading"]);
+const props = defineProps(["photo", "isModalLoading"]);
 
 const emit = defineEmits(["close"]);
+
+const downloadImage = async () => {
+  if (!props.photo || !props.photo.urls || !props.photo.urls.full) {
+    console.error("Photo data is missing");
+    return;
+  }
+
+  try {
+    const response = await fetch(props.photo.urls.full);
+    const blob = await response.blob();
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "downloaded-image.jpg"; // Custom filename
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (error) {
+    console.error("Error downloading image:", error);
+  }
+};
 </script>
 
 <template>
   <div v-if="photo" class="modal" @click.self="emit('close')">
     <div class="modal-content">
-      <button class="close-btn" @click.self="emit('close')">&times;</button>
+      <button class="close-btn" @click="emit('close')">&times;</button>
       <div v-if="isModalLoading" class="spinner">
         <NSpin size="large" />
       </div>
@@ -22,6 +42,10 @@ const emit = defineEmits(["close"]);
       <p class="modal-text">
         {{ photo.alt_description || "No title available" }}
       </p>
+      <!-- <a :href="photo.urls.full" download target="_blank" class="download-btn"
+        ><NButton secondary type="info">Download</NButton></a
+      > -->
+      <button @click="downloadImage" class="download-btn">Download</button>
     </div>
   </div>
 </template>
