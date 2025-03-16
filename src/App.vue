@@ -43,6 +43,7 @@ const getPhotos = async () => {
       },
     });
     photos.value = search.value.trim() ? response.data.results : response.data;
+    console.log(response);
   } catch (error) {
     console.log("Error fetching Unsplash photos", error);
   } finally {
