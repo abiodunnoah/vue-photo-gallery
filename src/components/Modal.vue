@@ -55,7 +55,9 @@ const downloadImage = async () => {
       <!-- <a :href="photo.urls.full" download target="_blank" class="download-btn"
         ><NButton secondary type="info">Download</NButton></a
       > -->
-      <button @click="downloadImage" class="download-btn">Download</button>
+      <NButton secondary type="info" @click="downloadImage" class="download-btn"
+        >Download</NButton
+      >
     </div>
   </div>
 </template>
@@ -77,7 +79,7 @@ const downloadImage = async () => {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  max-width: 70%;
+  max-width: 50%;
   /* max-height: 90%; */
 }
 .modal img {
@@ -91,8 +93,8 @@ const downloadImage = async () => {
 }
 .close-btn {
   position: absolute;
-  top: 15px;
-  right: 20px;
+  top: 70px;
+  right: 70px;
   font-size: 30px;
   background: none;
   border: none;
@@ -106,6 +108,10 @@ const downloadImage = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.download-btn {
+  margin-top: 10px;
 }
 
 @media (max-width: 670px) {
