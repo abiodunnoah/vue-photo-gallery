@@ -25,7 +25,7 @@ const downloadImage = async () => {
   // }
 
   try {
-    const response = await fetch(props.photo.urls.small);
+    const response = await fetch(props.photo.urls.full);
     const blob = await response.blob();
     saveAs(blob, props.photo.alt_description);
   } catch (error) {
